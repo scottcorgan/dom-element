@@ -1,6 +1,6 @@
 {
   "name": "domy-element",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "html or css selector into DOM elements",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,8 @@
     "faucet": "0.0.0"
   },
   "dependencies": {
-    "domify": "~1.1.1"
+    "domify": "~1.1.1",
+    "domy": "~0.2.2"
   },
   "testling": {
     "files": [
