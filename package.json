@@ -1,0 +1,48 @@
+{
+  "name": "dom-element",
+  "version": "0.1.0",
+  "description": "html or css selector into DOM elements",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/testling | node_modules/.bin/faucet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scottcorgan/dom-element.git"
+  },
+  "keywords": [
+    "dom",
+    "element",
+    "query",
+    "selector",
+    "sizzle"
+  ],
+  "author": "Scott Corgan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scottcorgan/dom-element/issues"
+  },
+  "devDependencies": {
+    "tape": "~2.3.2",
+    "testling": "~1.5.6",
+    "faucet": "0.0.0"
+  },
+  "dependencies": {
+    "domify": "~1.1.1"
+  },
+  "testling": {
+    "files": [
+      "test/index.js"
+    ],
+    "browsers": [
+      "iexplore/10.0",
+      "iexplore/9.0",
+      "firefox/16..latest",
+      "chrome/22..latest",
+      "safari/5.1..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
+  }
+}
