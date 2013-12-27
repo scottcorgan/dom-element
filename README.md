@@ -5,8 +5,6 @@ Html or css selector into DOM elements. For use with [Browserify](http://browser
 Part of the [Domy module collection](https://github.com/scottcorgan/domy).
 
 [![browser support](https://ci.testling.com/scottcorgan/domy-element.png)](https://ci.testling.com/scottcorgan/domy-element)
-
-(Uses document.querySelectorAll under the hood)
  
 ## Install
  
