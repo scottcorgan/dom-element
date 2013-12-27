@@ -1,6 +1,8 @@
 # domy-element
  
-html or css selector into DOM elements. For use with [Browserify](http://browserify.org).
+Html or css selector into DOM elements. For use with [Browserify](http://browserify.org).
+
+Part of the [Domy module collection](https://github.com/scottcorgan/domy).
 
 [![browser support](https://ci.testling.com/scottcorgan/domy-element.png)](https://ci.testling.com/scottcorgan/domy-element)
 
