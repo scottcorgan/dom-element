@@ -1,10 +1,10 @@
 {
   "name": "domy-element",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "html or css selector into DOM elements",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/testling | node_modules/.bin/faucet"
+    "test": "node_modules/.bin/testling"
   },
   "repository": {
     "type": "git",
@@ -24,12 +24,12 @@
   },
   "devDependencies": {
     "tape": "~2.3.2",
-    "testling": "~1.5.6",
-    "faucet": "0.0.0"
+    "testling": "~1.5.6"
   },
   "dependencies": {
     "domify": "~1.1.1",
-    "domy": "~0.2.2"
+    "domy": "~0.2.2",
+    "regular": "~0.1.6"
   },
   "testling": {
     "files": [
