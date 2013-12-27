@@ -2,6 +2,7 @@ var element = require('../index.js');
 var test = require('tape');
 var regular = require('regular');
 
+
 test('turns html string info dom element', function (t) {
   var el = element('<div class="item"></div>');
   
@@ -34,7 +35,9 @@ test('returns null if invalid selector is passed', function (t) {
 test('returns multiple DOM elements if there are multiple', function (t) {
   document.body.appendChild(element("<div class='parent'></div>"));
   
-  var els = element('.parent', true);
+  var els = element('.parent', {
+    multiple: true
+  });
   
   t.equal(els.length, 2);
   t.end();
@@ -44,5 +47,17 @@ test('sugar for selecting multiple', function (t) {
   var els = element.all('.parent');
   
   t.equal(els.length, 2);
+  t.end();
+});
+
+test('creates wrapper object around element', function (t) {
+  var wrapped = element.wrap('<div><span class="child"></span></div>', {
+    getFirstChildClassName: function () {
+      return this.element.firstChild.className;
+    }
+  });
+  
+  t.ok(wrapped.getFirstChildClassName);
+  t.equal(wrapped.getFirstChildClassName(), 'child');
   t.end();
 });

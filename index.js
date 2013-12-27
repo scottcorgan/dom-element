@@ -1,13 +1,29 @@
 var domify = require('domify');
 var regular = require('regular');
 
-var element = function (data, multiple) {
+var element = function (data, options) {
+  options = options || {};
+  
   var type = whichType(data);
-  return element[type](data, multiple);
-}
+  var el = element[type](data, options.multiple);
+  
+  return el;
+};
+
+element.wrap = function (data, _prototype_) {
+  var F = function (_data) {
+    this.element = element(_data);
+  }
+  
+  F.prototype = _prototype_;
+  
+  return new F(data);
+};
 
 element.all = function (data) {
-  return element(data, true);
+  return element(data, {
+    multiple: true
+  });
 };
 
 element.dom = function (el) {
