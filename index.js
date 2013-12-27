@@ -18,10 +18,11 @@ element.wrap = function (data, _prototype_) {
   return new F(data);
 };
 
-element.all = function (data) {
-  return element(data, {
-    multiple: true
-  });
+element.all = function (data, options) {
+  if (!options) options = {};
+  options.multiple = true;
+  
+  return element(data, options);
 };
 
 element.dom = function (el) {
