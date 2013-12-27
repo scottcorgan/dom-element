@@ -61,3 +61,23 @@ test('creates wrapper object around element', function (t) {
   t.equal(wrapped.getFirstChildClassName(), 'child');
   t.end();
 });
+
+test('uses a context to query with a selector', function (t) {
+  var el = element("<div class='parent'><div class='item'></div></div><div class='item'></div>");
+  
+  var itemsAs2 = element('.item', {
+    context: el,
+    multiple: true
+  });
+  
+  var itemsInParent = element('.item', {
+    context: element('.parent', {
+      context: el,
+    }),
+    multiple: true
+  });
+  
+  t.equal(itemsAs2.length, 2);
+  t.equal(itemsInParent.length, 1);
+  t.end();
+})

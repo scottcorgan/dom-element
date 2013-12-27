@@ -2,10 +2,8 @@ var domify = require('domify');
 var regular = require('regular');
 
 var element = function (data, options) {
-  options = options || {};
-  
   var type = whichType(data);
-  var el = element[type](data, options.multiple);
+  var el = element[type](data, options || {});
   
   return el;
 };
@@ -34,11 +32,12 @@ element.html = function (html) {
   return domify(html);
 };
 
-element.selector = function (selector, multiple) {
+element.selector = function (selector, options) {
   var _element = null;
-  var domQuery = (multiple) ? document.querySelectorAll : document.querySelector;
+  var context = (options.context) ? element(options.context) : document;
+  var domQuery = (options.multiple) ? context.querySelectorAll : context.querySelector;
   
-  try { _element = domQuery.call(document, selector); }
+  try { _element = domQuery.call(context, selector); }
   catch(e) {}
   
   return _element;
