@@ -32,9 +32,9 @@ var items = element('.parent').all('.items');
 ### element(data);
 
 * `data` - a string, css selector, or DOM element
-* * Example 1: `element('<div class="item"></div>').one()` - returns a DOM element with a class of *item*
-* * Example 2: `element(document.body).one()` - returns the *body* DOM element
-* * Example 3: `element('body').one()` - returns the *body* DOM element
+  * Example 1: `element('<div class="item"></div>').one()` - returns a DOM element with a class of *item*
+  * Example 2: `element(document.body).one()` - returns the *body* DOM element
+  * Example 3: `element('body').one()` - returns the *body* DOM element
 
 ## Instance Methods
 
