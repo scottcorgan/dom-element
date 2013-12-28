@@ -87,30 +87,3 @@ test('element wrapper works with domified string', function (t) {
   t.equal(wrappedEl.element.one().className, 'parent');
   t.end();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// test('creates wrapper object around element', function (t) {
-//   var wrapped = element.wrap('<div><span class="child"></span></div>', {
-//     getFirstChildClassName: function () {
-//       return this.element.firstChild.className;
-//     }
-//   });
-  
-//   t.ok(wrapped.getFirstChildClassName);
-//   t.equal(wrapped.getFirstChildClassName(), 'child');
-//   t.end();
-// });
