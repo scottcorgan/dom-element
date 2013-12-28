@@ -1,47 +1,75 @@
 var domify = require('domify');
 var regular = require('regular');
 
-var element = function (data, options) {
-  var type = whichType(data);
-  var el = element[type](data, options || {});
-  
-  return el;
+var element = module.exports = function (selector) {
+  return new Element(selector);
 };
 
-element.wrap = function (data, _prototype_) {
+var Element = function (selector) {
+  this._type = whichType(selector);
+  this._selector = selector;
+  this._context = document;
+};
+
+Element.prototype.one = function (contextSelector) {
+  if (contextSelector) this._setSelectorContext(contextSelector);
+  
+  return this._queryByType('querySelector');
+};
+
+Element.prototype.all = function (contextSelector) {
+  if (contextSelector) this._setSelectorContext(contextSelector);
+  
+  var els = this._queryByType('querySelectorAll');
+  
+  // Make sure it's always an array
+  return (els && els.length)
+    ? [].slice.call(els, 0)
+    : [els];
+};
+
+Element.prototype._queryByType = function (queryMethod) {
+  if (this._type === 'dom') return this._selector;
+  if (this._type === 'html') return domify(this._selector);
+  if (this._type === 'selector') return this._query(queryMethod);
+  
+  return null;
+};
+
+Element.prototype._query = function (queryMethod) {
+  var _element = null;
+  
+  try{
+    _element = this._context[queryMethod].call(this._context, this._selector);
+  } 
+  catch(e) {}
+  
+  return _element;
+};
+
+Element.prototype._setSelectorContext = function (newSelector) {
+  
+  // Reset context, selector, and type for parent to child queries
+  if (this._type !== 'selector') {
+    this._context = this._selector;
+    this._selector = newSelector;
+    this._type = whichType(newSelector);
+  }
+  else{
+    this._selector = this._selector + ' ' + newSelector;
+  }
+  
+  return this;
+};
+
+Element.prototype.wrap = function (_prototype_) {
   var F = function (_data) {
     this.element = element(_data);
   }
   
   F.prototype = _prototype_;
   
-  return new F(data);
-};
-
-element.all = function (data, options) {
-  if (!options) options = {};
-  options.multiple = true;
-  
-  return element(data, options);
-};
-
-element.dom = function (el) {
-  return el;
-};
-
-element.html = function (html) {
-  return domify(html);
-};
-
-element.selector = function (selector, options) {
-  var _element = null;
-  var context = (options.context) ? element(options.context) : document;
-  var domQuery = (options.multiple) ? context.querySelectorAll : context.querySelector;
-  
-  try { _element = domQuery.call(context, selector); }
-  catch(e) {}
-  
-  return _element;
+  return new F(this._selector);
 };
 
 function whichType (data) {
@@ -49,5 +77,3 @@ function whichType (data) {
   if (regular.html.test(data)) return 'html';
   return 'selector';
 }
-
-module.exports = element;
