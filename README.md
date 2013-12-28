@@ -17,28 +17,38 @@ npm install domy-element --save
 ```js
 var element = require('domy-element');
 
-var el = element('<div class="item"></div>');
-var el = element('#someId');
-var el = element(document.body);
+var el = element('#someId').one(); // single
+var els = element('.item').all(); // multiple
 
-// Multiple
-var els = element.all('.selector')
-// or
-var els = element('.selector', true);
+var el = element('<div class="item"></div>').one();
+var el = element(document.body).one();
+
+// In context
+var items = element('.parent').all('.items');
 ```
  
-## Methods
+## Element
 
-### element(data[, multiple]);
+### element(data);
 
 * `data` - a string, css selector, or DOM element
-* `multiple` - pass `true` for query to return multiple DOM elements
+* * Example 1: `element('<div class="item"></div>').one()` - returns a DOM element with a class of *item*
+* * Example 2: `element(document.body).one()` - returns the *body* DOM element
+* * Example 3: `element('body').one()` - returns the *body* DOM element
 
-### element.all(data)
+## Instance Methods
 
-Helper method which does the same thing as `element('.selector', true)`
+### all([selector])
 
-* `data` - css selector
+Returns an array of DOM elements
+
+* `selector` - css selector. If used, `selector` will select all DOM elements within the context of the parent selector used in the `element()` method.
+
+### one([selector])
+
+Returns a single DOM element
+
+* `selector` - css selector. If used, `selector` will select the first matching DOM elements within the context of the parent selector used in the `element()` method.
 
 ## Run Tests
 
